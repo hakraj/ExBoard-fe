@@ -1,9 +1,13 @@
+import { useAuth } from "@/AuthProvider";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { ArrowUpDown, ClipboardEdit, Edit, Plus, Timer, Trash2 } from "lucide-react";
+import { TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { ArrowUpDown, ClipboardEdit, Edit, Plus, Table, Timer, Trash2 } from "lucide-react";
 
 
 const Exam = () => {
+  const { user } = useAuth();
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -32,71 +36,72 @@ const Exam = () => {
 
       </div>
       <div className="p-2 md:p-4">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3  xl:data-[state=open]:grid-cols-3  gap-4">
-          {Array.from([1, 2, 3, 4, 5]).map((_, index) => {
-            return (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>First</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>df ffuym kxksksks ksjjjs ikmwjiw kk owmw o o k kkkssmd kwmwm kwks, slaappapa kkekmwapasieurhfnf iue ine u.</p>
-                </CardContent>
-                <CardFooter className="justify-between">
-                  <div className="inline-flex items-center max-md:self-start">
-                    <Timer className=" size-4 mr-1" />
-                    <span className="text-sm">
-                      2hr 30mins
-                    </span>
+        {user.role == "admin" ?
+          <Table>
+            <TableCaption>A list of available exams</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Questions</TableHead>
+                <TableHead>Tutor</TableHead>
+                <TableHead>Time limit</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-meduim">First</TableCell>
+                <TableCell>50</TableCell>
+                <TableCell>Mr.Raji</TableCell>
+                <TableCell>2hr 3min</TableCell>
+                <TableCell>
+                  <div>
+                    <Edit />
+                    <Trash2 />
                   </div>
-                  <Button size={'sm'}>
-                    <ClipboardEdit />
-                    Take Exam
-                  </Button>
-                </CardFooter>
-              </Card>
-            )
-          })}
-
-        </div>
-        {/* <Table>
-          <TableCaption>A list of available exams</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Questions</TableHead>
-              <TableHead>Tutor</TableHead>
-              <TableHead>Time limit</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell className="font-meduim">First</TableCell>
-              <TableCell>50</TableCell>
-              <TableCell>Mr.Raji</TableCell>
-              <TableCell>2hr 3min</TableCell>
-              <TableCell>
-                            <div>
-                <Edit />
-                <Trash2 />
-              </div>
-
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-meduim">Second</TableCell>
-              <TableCell>50</TableCell>
-              <TableCell>Mr.Raji</TableCell>
-              <TableCell>2hr 3min</TableCell>
-              <TableCell>
-                <div>
-                  <Edit />
-                  <Trash2 />
-                </div>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table> */}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-meduim">Second</TableCell>
+                <TableCell>50</TableCell>
+                <TableCell>Mr.Raji</TableCell>
+                <TableCell>2hr 3min</TableCell>
+                <TableCell>
+                  <div>
+                    <Edit />
+                    <Trash2 />
+                  </div>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          :
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3  xl:data-[state=open]:grid-cols-3  gap-4">
+            {Array.from([1, 2, 3, 4, 5]).map((_, index) => {
+              return (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle>First</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>df ffuym kxksksks ksjjjs ikmwjiw kk owmw o o k kkkssmd kwmwm kwks, slaappapa kkekmwapasieurhfnf iue ine u.</p>
+                  </CardContent>
+                  <CardFooter className="justify-between">
+                    <div className="inline-flex items-center max-md:self-start">
+                      <Timer className=" size-4 mr-1" />
+                      <span className="text-sm">
+                        2hr 30mins
+                      </span>
+                    </div>
+                    <Button size={'sm'}>
+                      <ClipboardEdit />
+                      Take Exam
+                    </Button>
+                  </CardFooter>
+                </Card>
+              )
+            })}
+          </div>
+        }
       </div>
     </div>
   )

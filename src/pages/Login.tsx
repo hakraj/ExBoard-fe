@@ -3,7 +3,7 @@ import { loginSchema } from "../lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import EyeSlash from "@/assets/svg/eye-slash.svg?react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/AuthProvider";
 
 
 
@@ -25,6 +26,7 @@ const Login = () => {
       password: "",
     }
   })
+  const { login, setAuthenticated } = useAuth();
   const navigate = useNavigate()
   const { toast } = useToast()
 
@@ -41,12 +43,19 @@ const Login = () => {
   // define login form handler
   const loginHandler = (data: z.infer<typeof loginSchema>) => {
     setIsLoading(true)
-    console.log("Form Data:", data);
 
     // Login API call here
     try {
       axios.post('http://localhost:3000/auth/login', data)
-        .then((response) => {
+        .then((response: AxiosResponse<{
+          success: boolean,
+          message: string,
+          user: {
+            reg_no: string,
+            role: string,
+            token: string,
+          }
+        }>) => {
           console.log(response);
           //create a toast message feedback 
           if (response.data?.success) {
@@ -54,6 +63,15 @@ const Login = () => {
               title: "Login successfully",
               description: response?.data?.message
             })
+
+            login({
+              reg_no: response?.data?.user.reg_no,
+              role: response?.data?.user.role,
+              token: response?.data?.user.token
+            })
+
+            setAuthenticated(true)
+
             navigate('/dashboard')
           } else {
             toast({
@@ -83,7 +101,7 @@ const Login = () => {
     <div className=" flex  min-h-screen items-center justify-center">
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-center space-x-1">
+          <div className="flex items-center justify-center space-x-1 my-1">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               <BookOpen className="size-4" />
             </div>
