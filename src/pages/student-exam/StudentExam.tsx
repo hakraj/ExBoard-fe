@@ -5,7 +5,7 @@ import { useAuth } from "@/AuthProvider";
 import { useToast } from "@/hooks/use-toast";
 import axios, { AxiosResponse, AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import { Exam, Question } from "../dashboard/exam/Exam";
+import { IExam, IQuestion } from "../dashboard/exam/Exam";
 import { IUser } from "../dashboard/users/Users";
 
 export interface IResponse {
@@ -16,7 +16,7 @@ export interface IResponse {
 
 export interface IStudentExam {
   student_id: IUser;
-  exam_id: Exam;
+  exam_id: IExam;
   responses: IResponse[];
   score: number;
   started_at: Date,
@@ -32,9 +32,9 @@ const StudentExam = () => {
 
   const [studentExam, setStudentExam] = useState<IStudentExam>()
 
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [questions, setQuestions] = useState<IQuestion[]>([])
 
-  const [fetching, setFetching] = useState<boolean>(true);
+  // const [fetching, setFetching] = useState<boolean>(true);
 
 
   const fetchStudentExam = async () => {
@@ -84,7 +84,7 @@ const StudentExam = () => {
     fetchStudentExam()
 
     return () => {
-      setFetching(false)
+      // setFetching(false)
     }
   }, [])
 

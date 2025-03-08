@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { examSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { ArrowUpDown, ClipboardEdit, Edit, Loader2, Plus, Timer, Trash2 } from "lucide-react";
+import { ClipboardEdit, Edit, Loader2, Plus, Timer, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ import { z } from "zod";
 
 
 // types
-export interface Exam {
+export interface IExam {
   _id: string
   title: string,
   description?: string,
@@ -28,10 +28,10 @@ export interface Exam {
     _id: string,
     name: string
   },
-  questions: Question[]
+  questions: IQuestion[]
 }
 
-export interface Question {
+export interface IQuestion {
   _id: string,
   text: string,
   options: string[],
@@ -80,7 +80,7 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Exam,
+          data: IExam,
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -205,7 +205,7 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
   )
 }
 
-const UpdateExam = ({ exam, fetchExams }: { exam: Exam, fetchExams: () => Promise<void> }) => {
+const UpdateExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promise<void> }) => {
   // define update form
   const form = useForm<z.infer<typeof examSchema>>({
     resolver: zodResolver(examSchema),
@@ -236,7 +236,7 @@ const UpdateExam = ({ exam, fetchExams }: { exam: Exam, fetchExams: () => Promis
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Exam,
+          data: IExam,
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -362,7 +362,7 @@ const UpdateExam = ({ exam, fetchExams }: { exam: Exam, fetchExams: () => Promis
   )
 }
 
-const DeleteExam = ({ exam, fetchExams }: { exam: Exam, fetchExams: () => Promise<void> }) => {
+const DeleteExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promise<void> }) => {
   const { user } = useAuth();
 
   const { toast } = useToast()
@@ -450,12 +450,12 @@ const DeleteExam = ({ exam, fetchExams }: { exam: Exam, fetchExams: () => Promis
 const Exam = () => {
   const { user } = useAuth();
 
-  const [exams, setExams] = useState<Exam[]>([])
+  const [exams, setExams] = useState<IExam[]>([])
 
   const navigate = useNavigate()
   const { toast } = useToast()
 
-  const [fetching, setFetching] = useState<boolean>(true);
+  // const [fetching, setFetching] = useState<boolean>(true);
 
   const fetchExams = async () => {
     try {
@@ -467,7 +467,7 @@ const Exam = () => {
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Exam[]
+          data: IExam[]
         }>) => {
           //create a toast message feedback 
           if (response.data?.success) {
@@ -500,7 +500,7 @@ const Exam = () => {
 
 
     return () => {
-      setFetching(false)
+      // setFetching(false)
     }
   }, [])
 

@@ -1,7 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 
-const queryClient = useQueryClient();
+// const queryClient = useQueryClient();
 
 // // GET
 // const query = useQuery({queryKey: ['first'], queryFn: getQuery})

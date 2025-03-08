@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { BookOpen } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 

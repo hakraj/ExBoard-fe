@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Question } from "../dashboard/exam/Exam";
+import { IQuestion } from "../dashboard/exam/Exam";
 import { useOutletContext } from 'react-router-dom'
 import { toast } from '@/hooks/use-toast'
 import axios, { AxiosResponse, AxiosError } from 'axios'
@@ -13,7 +13,7 @@ import { useAuth } from '@/AuthProvider'
 
 const StudentExamId = () => {
   const { user } = useAuth();
-  const [questions, exam_id, fetchStudentExam]: [Question[], string, () => Promise<void>] = useOutletContext()
+  const [questions, exam_id, fetchStudentExam]: [IQuestion[], string, () => Promise<void>] = useOutletContext()
 
   const [active, setActive] = useState(0)
 

@@ -1,5 +1,5 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from "@/components/ui/sidebar"
-import { ChevronsUpDown, BookOpen, ChartAreaIcon, Users, FileSpreadsheet } from "lucide-react"
+import { BookOpen, ChartAreaIcon, Users, FileSpreadsheet } from "lucide-react"
 import { NavMain } from "./NavMain"
 import { NavUser } from "./NavUser"
 

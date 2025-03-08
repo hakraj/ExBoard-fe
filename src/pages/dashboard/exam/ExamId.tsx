@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/AuthProvider"
-import { Exam, Question, changeMinToHour } from "./Exam"
+import { IExam, IQuestion, changeMinToHour } from "./Exam"
 import { useParams } from "react-router-dom"
 import { useToast } from "@/hooks/use-toast"
 import axios, { AxiosResponse, AxiosError } from "axios"
@@ -19,7 +19,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 
 
-const Question = ({ exam, fetchExam, question, index }: { index: number, exam?: Exam, question: Question, fetchExam: () => Promise<void> }) => {
+const Question = ({ exam, fetchExam, question, index }: { index: number, exam?: IExam, question: IQuestion, fetchExam: () => Promise<void> }) => {
   const [dropdown, setDropdown] = useState<Boolean>(true);
   return (
     <Card>
@@ -70,7 +70,7 @@ const Question = ({ exam, fetchExam, question, index }: { index: number, exam?: 
   )
 }
 
-const CreateQuestion = ({ exam, fetchExam }: { exam?: Exam, fetchExam: () => Promise<void> }) => {
+const CreateQuestion = ({ exam, fetchExam }: { exam?: IExam, fetchExam: () => Promise<void> }) => {
   const form = useForm<z.infer<typeof questionSchema>>({
     resolver: zodResolver(questionSchema),
     defaultValues: {
@@ -107,7 +107,7 @@ const CreateQuestion = ({ exam, fetchExam }: { exam?: Exam, fetchExam: () => Pro
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Question[],
+          data: IQuestion[],
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -303,7 +303,7 @@ const CreateQuestion = ({ exam, fetchExam }: { exam?: Exam, fetchExam: () => Pro
   )
 }
 
-const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: Exam, question: Question, fetchExam: () => Promise<void> }) => {
+const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: IExam, question: IQuestion, fetchExam: () => Promise<void> }) => {
   const form = useForm<z.infer<typeof questionSchema>>({
     resolver: zodResolver(questionSchema),
     defaultValues: {
@@ -340,7 +340,7 @@ const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: Exam, question: 
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Question[],
+          data: IQuestion[],
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -527,7 +527,7 @@ const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: Exam, question: 
   )
 }
 
-const DeleteQuestion = ({ index, exam, question, fetchExam }: { index: number, exam?: Exam, question: Question, fetchExam: () => Promise<void> }) => {
+const DeleteQuestion = ({ index, exam, question, fetchExam }: { index: number, exam?: IExam, question: IQuestion, fetchExam: () => Promise<void> }) => {
   const { user } = useAuth();
 
   const { toast } = useToast()
@@ -616,13 +616,13 @@ const ExamId = () => {
   const { exam_id } = useParams()
   const { toast } = useToast()
 
-  const [exam, setExam] = useState<Exam>()
+  const [exam, setExam] = useState<IExam>()
 
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [questions, setQuestions] = useState<IQuestion[]>([])
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [fetching, setFetching] = useState<boolean>(true);
+  // const [fetching, setFetching] = useState<boolean>(true);
 
   const publishExam = async () => {
     setIsLoading(true)
@@ -637,7 +637,7 @@ const ExamId = () => {
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Exam,
+          data: IExam,
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -673,8 +673,6 @@ const ExamId = () => {
     setIsLoading(false)
   }
 
-
-
   const fetchExam = async () => {
     try {
       await axios.get(`http://localhost:3000/exam/${exam_id}`, {
@@ -685,7 +683,7 @@ const ExamId = () => {
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
-          data: Exam
+          data: IExam
         }>) => {
           //create a toast message feedback 
           if (response.data?.success) {
@@ -720,7 +718,7 @@ const ExamId = () => {
 
 
     return () => {
-      setFetching(false)
+      // setFetching(false)
     }
   }, [])
 
@@ -772,7 +770,7 @@ const ExamId = () => {
             <Loader2 className="animate-spin" />
             Please wait
           </Button> :
-          <Button className="text-lg" size={'lg'}>
+          <Button onClick={() => publishExam()} className="text-lg" size={'lg'}>
             <Save />
             Publish Exam
           </Button>

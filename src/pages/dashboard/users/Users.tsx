@@ -22,7 +22,7 @@ const Users = () => {
 
   const [educators, setEducators] = useState<IUser[]>([])
 
-  const [fetching, setFetching] = useState<boolean>(true);
+  const [, setFetching] = useState<boolean>(true);
 
   const fetchUsers = async () => {
     try {

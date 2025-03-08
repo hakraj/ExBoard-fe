@@ -98,7 +98,7 @@ const Results = () => {
 
   const [results, setResults] = useState<IStudentExam[]>([])
   const [stdResults, setStdResults] = useState<IStudentExam[]>([])
-  const [fetching, setFetching] = useState<boolean>(true);
+  // const [fetching, setFetching] = useState<boolean>(true);
 
 
   const fecthResults = async () => {
@@ -182,7 +182,7 @@ const Results = () => {
     fecthResults()
 
     return () => {
-      setFetching(false)
+      // setFetching(false)
     }
   }, [])
   return (
