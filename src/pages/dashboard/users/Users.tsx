@@ -26,7 +26,7 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      await axios.get('http://localhost:3000/auth/all/student', {
+      await axios.get('https://ex-board.vercel.app/auth/all/student', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -56,7 +56,7 @@ const Users = () => {
           })
         })
 
-      await axios.get('http://localhost:3000/auth/all/admin', {
+      await axios.get('https://ex-board.vercel.app/auth/all/admin', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

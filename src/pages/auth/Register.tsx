@@ -46,7 +46,7 @@ const Register = () => {
     // Add your registration API call here
 
     try {
-      axios.post('http://localhost:3000/auth/regisTer', {
+      axios.post('https://ex-board.vercel.app/auth/regisTer', {
         name: data.name,
         reg_no: data.reg_no,
         email: data.email,

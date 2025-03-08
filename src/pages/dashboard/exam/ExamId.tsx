@@ -95,7 +95,7 @@ const CreateQuestion = ({ exam, fetchExam }: { exam?: IExam, fetchExam: () => Pr
 
     // API logic
     try {
-      await axios.post(`http://localhost:3000/exam/${exam?._id}/questions/`, {
+      await axios.post(`https://ex-board.vercel.app/exam/${exam?._id}/questions/`, {
         text: data.text,
         options: [data.option1, data.option2, data.option3, data.option4],
         answer: data.answer,
@@ -328,7 +328,7 @@ const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: IExam, question:
 
     // API logic
     try {
-      await axios.put(`http://localhost:3000/exam/${exam?._id}/questions/update/${question._id}`, {
+      await axios.put(`https://ex-board.vercel.app/exam/${exam?._id}/questions/update/${question._id}`, {
         text: data.text,
         options: [data.option1, data.option2, data.option3, data.option4],
         answer: data.answer,
@@ -541,7 +541,7 @@ const DeleteQuestion = ({ index, exam, question, fetchExam }: { index: number, e
 
     //API logic
     try {
-      await axios.delete(`http://localhost:3000/exam/${exam?._id}/questions/delete/${question._id}`, {
+      await axios.delete(`https://ex-board.vercel.app/exam/${exam?._id}/questions/delete/${question._id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -629,7 +629,7 @@ const ExamId = () => {
 
     // API logic
     try {
-      await axios.put(`http://localhost:3000/exam/update/${exam?._id}`, { is_published: true }, {
+      await axios.put(`https://ex-board.vercel.app/exam/update/${exam?._id}`, { is_published: true }, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -675,7 +675,7 @@ const ExamId = () => {
 
   const fetchExam = async () => {
     try {
-      await axios.get(`http://localhost:3000/exam/${exam_id}`, {
+      await axios.get(`https://ex-board.vercel.app/exam/${exam_id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

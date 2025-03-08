@@ -85,7 +85,7 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
-      await axios.put(`http://localhost:3000/student-exam/${studentExam?._id}/complete`, {}, {
+      await axios.put(`https://ex-board.vercel.app/student-exam/${studentExam?._id}/complete`, {}, {
         headers: {
           'Authorization': `Bearer ${user.exam_access}`
         }

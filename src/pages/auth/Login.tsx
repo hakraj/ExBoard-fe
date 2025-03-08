@@ -47,7 +47,7 @@ const Login = () => {
 
     // Login API call here
     try {
-      await axios.post('http://localhost:3000/auth/login', data)
+      await axios.post('https://ex-board.vercel.app/auth/login', data)
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,

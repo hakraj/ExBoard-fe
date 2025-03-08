@@ -72,7 +72,7 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
 
     // API logic
     try {
-      await axios.post('http://localhost:3000/exam/', data, {
+      await axios.post('https://ex-board.vercel.app/exam/', data, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -228,7 +228,7 @@ const UpdateExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promi
 
     // API logic
     try {
-      await axios.put(`http://localhost:3000/exam/update/${exam._id}`, data, {
+      await axios.put(`https://ex-board.vercel.app/exam/update/${exam._id}`, data, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -376,7 +376,7 @@ const DeleteExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promi
 
     //API logic
     try {
-      await axios.delete(`http://localhost:3000/exam/delete/${exam._id}`, {
+      await axios.delete(`https://ex-board.vercel.app/exam/delete/${exam._id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -459,7 +459,7 @@ const Exam = () => {
 
   const fetchExams = async () => {
     try {
-      await axios.get('http://localhost:3000/exam/all/exams', {
+      await axios.get('https://ex-board.vercel.app/exam/all/exams', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

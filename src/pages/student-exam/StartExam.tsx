@@ -44,7 +44,7 @@ const StartExam = () => {
 
     // Login API call here
     try {
-      await axios.post(`http://localhost:3000/student-exam/start/${exam_id}`, data, {
+      await axios.post(`https://ex-board.vercel.app/student-exam/start/${exam_id}`, data, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

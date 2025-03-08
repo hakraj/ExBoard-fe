@@ -21,7 +21,7 @@ const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthRes
 
     //API logic
     try {
-      await axios.delete(`http://localhost:3000/student-exam/${result._id}/delete`, {
+      await axios.delete(`https://ex-board.vercel.app/student-exam/${result._id}/delete`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -104,7 +104,7 @@ const Results = () => {
   const fecthResults = async () => {
     // All records
     try {
-      await axios.get('http://localhost:3000/student-exam/all/record', {
+      await axios.get('https://ex-board.vercel.app/student-exam/all/record', {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -141,7 +141,7 @@ const Results = () => {
 
     // Individual record
     try {
-      await axios.get(`http://localhost:3000/student-exam/id`, {
+      await axios.get(`https://ex-board.vercel.app/student-exam/id`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

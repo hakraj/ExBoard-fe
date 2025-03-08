@@ -39,7 +39,7 @@ const StudentExam = () => {
 
   const fetchStudentExam = async () => {
     try {
-      await axios.get(`http://localhost:3000/student-exam/${exam_id}`, {
+      await axios.get(`https://ex-board.vercel.app/student-exam/${exam_id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

@@ -27,7 +27,7 @@ const StudentExamId = () => {
 
     if (newResponse.question_id && newResponse.selected_option) {
       try {
-        await axios.put(`http://localhost:3000/student-exam/${exam_id}/response/${newResponse.question_id}`, newResponse, {
+        await axios.put(`https://ex-board.vercel.app/student-exam/${exam_id}/response/${newResponse.question_id}`, newResponse, {
           headers: {
             'Authorization': `Bearer ${user.exam_access}`
           }
