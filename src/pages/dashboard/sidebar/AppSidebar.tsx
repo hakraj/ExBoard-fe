@@ -14,25 +14,25 @@ const AppSidebar = () => {
   const navItems = [
     {
       title: "Dashboard",
-      url: "/dashboard/home",
+      url: "dashboard/home",
       icon: ChartAreaIcon,
       isActive: true,
     },
     {
       title: "Exams",
-      url: "/dashboard/exam",
+      url: "dashboard/exam",
       icon: BookOpen,
       admin: true,
     },
     {
       title: "Users",
-      url: "/dashboard/users",
+      url: "dashboard/users",
       icon: Users,
       admin: true,
     },
     {
       title: "Results",
-      url: "/dashboard/results",
+      url: "dashboard/results",
       icon: FileSpreadsheet,
     },
   ]

@@ -509,7 +509,7 @@ const Exam = () => {
     <div>
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-semibold tracking-wide">Exams</h2>
-        <CreatExam fetchExams={fetchExams} />
+        {user.role == "admin" && <CreatExam fetchExams={fetchExams} />}
       </div>
       <div className="flex max-md:flex-col items-center md:justify-between p-2 md:p-4 mt-4">
         <div className="max-md:self-start">

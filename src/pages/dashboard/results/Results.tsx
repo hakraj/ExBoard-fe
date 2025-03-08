@@ -103,45 +103,47 @@ const Results = () => {
 
   const fecthResults = async () => {
     // All records
-    try {
-      await axios.get('https://ex-board.vercel.app/student-exam/all/record', {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      })
-        .then((response: AxiosResponse<{
-          success: boolean,
-          message: string,
-          data: IStudentExam[]
-        }>) => {
-          //create a toast message feedback 
-          if (response.data?.success) {
-            const fetchedUsers = response.data?.data
-            setResults(fetchedUsers)
-
-          } else {
-            toast({
-              variant: "destructive",
-              title: "Failed to fetch students!",
-              description: response?.data?.message
-            })
+    if (user.role === "admin") {
+      try {
+        await axios.get('https://ex-board.vercel.app/student-exam/all/record', {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
           }
-        }).catch((err: AxiosError<{ message: string }>) => {
-          console.error(err)
-          return toast({
-            variant: "destructive",
-            title: "Request Error!",
-            description: err.response?.data?.message
-          })
         })
+          .then((response: AxiosResponse<{
+            success: boolean,
+            message: string,
+            data: IStudentExam[]
+          }>) => {
+            //create a toast message feedback 
+            if (response.data?.success) {
+              const fetchedUsers = response.data?.data
+              setResults(fetchedUsers)
 
-    } catch (error) {
-      console.error('Caught an error: ', error)
+            } else {
+              toast({
+                variant: "destructive",
+                title: "Failed to fetch students!",
+                description: response?.data?.message
+              })
+            }
+          }).catch((err: AxiosError<{ message: string }>) => {
+            console.error(err)
+            return toast({
+              variant: "destructive",
+              title: "Request Error!",
+              description: err.response?.data?.message
+            })
+          })
+
+      } catch (error) {
+        console.error('Caught an error: ', error)
+      }
     }
 
     // Individual record
     try {
-      await axios.get(`https://ex-board.vercel.app/student-exam/id`, {
+      await axios.get(`https://ex-board.vercel.app/student-exam/all/id`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

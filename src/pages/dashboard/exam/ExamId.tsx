@@ -154,7 +154,7 @@ const CreateQuestion = ({ exam, fetchExam }: { exam?: IExam, fetchExam: () => Pr
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size={'lg'} variant={'secondary'} >
+        <Button disabled={exam?.is_published} size={'lg'} variant={'secondary'} >
           <PlusCircle />
           Add New Question
         </Button>
@@ -378,7 +378,7 @@ const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: IExam, question:
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={'secondary'}>
+        <Button disabled={exam?.is_published} variant={'secondary'}>
           <Edit className="size-5" />
           Update question
         </Button>
@@ -586,7 +586,7 @@ const DeleteQuestion = ({ index, exam, question, fetchExam }: { index: number, e
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size={'sm'} variant={'destructive'}>Delete</Button>
+        <Button disabled={exam?.is_published} size={'sm'} variant={'destructive'}>Delete</Button>
       </DialogTrigger>
       <DialogContent className="border-red-400">
         <DialogHeader>
@@ -629,7 +629,7 @@ const ExamId = () => {
 
     // API logic
     try {
-      await axios.put(`https://ex-board.vercel.app/exam/update/${exam?._id}`, { is_published: true }, {
+      await axios.put(`https://ex-board.vercel.app/exam/update/${exam?._id}`, { is_published: !exam?.is_published }, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -772,7 +772,11 @@ const ExamId = () => {
           </Button> :
           <Button onClick={() => publishExam()} className="text-lg" size={'lg'}>
             <Save />
-            Publish Exam
+            {exam?.is_published ?
+              "Unpublish"
+              :
+              "Publish Exam"
+            }
           </Button>
         }
       </div>
