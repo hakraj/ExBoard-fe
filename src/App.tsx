@@ -25,7 +25,7 @@ const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
     return <Navigate to="/login" />
   }
   if (!allowedRoles.includes(user.role)) {
-    return <Navigate to="/dashboard/home" />
+    return <Navigate to="/dashboard/exam" />
   }
   return <Outlet />;
 }

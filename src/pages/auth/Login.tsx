@@ -155,7 +155,7 @@ const Login = () => {
                       </div>
                     </FormControl>
                     <FormDescription>
-                      Test Password:
+                      Test Password: qwerty
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

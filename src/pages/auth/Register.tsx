@@ -46,7 +46,7 @@ const Register = () => {
     // Add your registration API call here
 
     try {
-      axios.post('https://ex-board.vercel.app/auth/regisTer', {
+      axios.post('https://ex-board.vercel.app/auth/register', {
         name: data.name,
         reg_no: data.reg_no,
         email: data.email,
@@ -58,14 +58,14 @@ const Register = () => {
 
           if (response.data?.success) {
             toast({
-              title: "Login successfully",
+              title: "Register successfully",
               description: response?.data?.message,
             })
             navigate('/login');
           } else {
             toast({
               variant: "destructive",
-              title: "Login Failed!",
+              title: "Register Failed!",
               description: response?.data?.message
             })
           }
@@ -75,7 +75,7 @@ const Register = () => {
           console.error(err)
           toast({
             variant: "destructive",
-            title: "Login Failed!",
+            title: "Register Failed!",
             description: err.response?.data?.message
           })
         })
@@ -130,7 +130,7 @@ const Register = () => {
                       <Input placeholder="e.g 25/STD001" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Test Registration no: 25/STD001; Admin: 25/EDU001
+                      Student: 25/STD000; Admin: 25/EDU000
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
