@@ -36,10 +36,10 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route index path='/' element={<Welcome />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/forgot-password' element={<ForgetPassword />} />
-          <Route path='/reset-password/:id' element={<ResetPassword />} />
+          <Route path='register' element={<Register />} />
+          <Route path='login' element={<Login />} />
+          <Route path='forgot-password' element={<ForgetPassword />} />
+          <Route path='reset-password/:id' element={<ResetPassword />} />
           <Route path='*' element={<NoPageFound />} />
 
           {/* PROTECTED ROUTES */}
@@ -51,11 +51,11 @@ function App() {
             </Route>
 
             {/* Exam Interface */}
-            <Route path='/student-exam/start/:exam_id' element={<StartExam />} />
-            <Route path='/student-exam' element={<StudentExam />} >
+            <Route path='student-exam/start/:exam_id' element={<StartExam />} />
+            <Route path='student-exam' element={<StudentExam />} >
               <Route path="ongoing/:exam_id" element={<StudentExamId />} />
             </Route>
-            <Route path='/student-exam/complete' element={<ExamCompleted />} />
+            <Route path='student-exam/complete' element={<ExamCompleted />} />
           </Route>
 
           {/* Admin access */}
