@@ -1,7 +1,11 @@
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <div>
+        <h2 className="text-2xl font-semibold tracking-wide">Analytics coming soon</h2>
+      </div>
+    </div>
   )
 }
 

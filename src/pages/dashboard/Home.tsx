@@ -2,9 +2,16 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbS
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 import AppSidebar from "./sidebar/AppSidebar"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 
 const Home = () => {
+  const location = useLocation();
+
+  const paths = location.pathname.split("/")
+
+  const capitalize = (str: string) => {
+    return str?.charAt(0).toUpperCase() + str?.slice(1);
+  }
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -16,11 +23,11 @@ const Home = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                  <BreadcrumbPage>{capitalize(paths[1])}</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Home</BreadcrumbPage>
+                  <BreadcrumbLink href={location.pathname}>{paths[2] ? capitalize(paths[2]) : "Home"}</BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -30,7 +37,7 @@ const Home = () => {
           <Outlet />
         </div>
       </SidebarInset>
-    </SidebarProvider>
+    </SidebarProvider >
   )
 }
 

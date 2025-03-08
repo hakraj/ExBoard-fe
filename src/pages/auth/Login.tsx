@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { loginSchema } from "../lib/zodSchema";
+import { loginSchema } from "../../lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
@@ -26,6 +26,7 @@ const Login = () => {
       password: "",
     }
   })
+
   const { login, setAuthenticated } = useAuth();
   const navigate = useNavigate()
   const { toast } = useToast()
@@ -41,17 +42,19 @@ const Login = () => {
   const [viewPassword, setViewPassword] = useState<boolean>(false);
 
   // define login form handler
-  const loginHandler = (data: z.infer<typeof loginSchema>) => {
+  const loginHandler = async (data: z.infer<typeof loginSchema>) => {
     setIsLoading(true)
 
     // Login API call here
     try {
-      axios.post('http://localhost:3000/auth/login', data)
+      await axios.post('http://localhost:3000/auth/login', data)
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
           user: {
+            name: string,
             reg_no: string,
+            email: string,
             role: string,
             token: string,
           }
@@ -65,6 +68,7 @@ const Login = () => {
             })
 
             login({
+              name: response?.data?.user.name,
               reg_no: response?.data?.user.reg_no,
               role: response?.data?.user.role,
               token: response?.data?.user.token
@@ -72,7 +76,7 @@ const Login = () => {
 
             setAuthenticated(true)
 
-            navigate('/dashboard')
+            navigate('/dashboard/home')
           } else {
             toast({
               variant: "destructive",
@@ -173,70 +177,6 @@ const Login = () => {
       </Card>
     </div>
   )
-
-  // return (
-  //   <>
-  //     <div className=" flex  min-h-screen items-center justify-center ">
-  //       <div>
-  //         <form
-  //           onSubmit={onSubmit}
-  //           className="w-full md:min-w-96 max-w-md p-6 bg-white shadow-md rounded-md"
-  //         >
-  //           <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-  //             Login to continue
-  //           </h2>
-
-
-  //           {/* Registration Number Field */}
-  //           <div className="mb-4">
-  //             <label className="block text-sm font-medium text-gray-700">
-  //               Registration Number
-  //             </label>
-  //             <input
-  //               type="text"
-  //               {...register("reg_no")}
-  //               className={`mt-1 block w-full px-4 py-2 border rounded-md ${errors.reg_no ? "border-red-500" : "border-gray-300"
-  //                 }`}
-  //             />
-  //             {errors.reg_no && (
-  //               <p className="text-sm text-red-500 mt-1">{errors.reg_no.message}</p>
-  //             )}
-  //           </div>
-
-  //           {/* Password Field */}
-  //           <div className="mb-6">
-  //             <label className="block text-sm font-medium text-gray-700">
-  //               Password
-  //             </label>
-  //             <input
-  //               type="password"
-  //               {...register("password")}
-  //               className={`mt-1 block w-full px-4 py-2 border rounded-md ${errors.password ? "border-red-500" : "border-gray-300"
-  //                 }`}
-  //             />
-  //             {errors.password && (
-  //               <p className="text-sm text-red-500 mt-1">
-  //                 {errors.password.message}
-  //               </p>
-  //             )}
-  //           </div>
-
-
-  //           {/* Submit Button */}
-  //           <button
-  //             type="submit"
-  //             className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
-  //           >
-  //             {
-  //               isLoading ?
-  //                 <div className="w-5 h-5 rounded-full animate-spin border-2 border-solid border-white border-t-transparent shadow-md mx-auto my-1"></div>
-  //                 : "Login"}
-  //           </button>
-  //         </form>
-  //       </div>
-  //     </div>
-  //   </>
-  // )
 }
 
 export default Login;
