@@ -101,7 +101,7 @@ const StudentExamId = () => {
             setActive(active + 1)
           }}>Next <ChevronRight /></Button>
         </div>
-        <div className='flex justify-center items-center gap-1'>
+        <div className='flex justify-center items-center my-4 gap-1 '>
           {questions.map((_, index) => {
             return (
               <Button key={index} onClick={() => {

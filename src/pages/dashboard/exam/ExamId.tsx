@@ -752,7 +752,7 @@ const ExamId = () => {
       </div>
       <div className="p-2 md:p-4 md:w-3/4">
         <p className=" font-light text-lg tracking-tight leading-normal">{exam?.description}</p>
-        <p className="mt-2 font-medium">50 Questions</p>
+        <p className="mt-2 font-medium">{exam?.questions.length} Questions</p>
       </div>
       <div className="p-2 md:p-4 flex flex-col space-y-2">
         {questions.map((question, index) => {

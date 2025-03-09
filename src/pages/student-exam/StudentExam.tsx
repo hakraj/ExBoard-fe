@@ -1,4 +1,4 @@
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import ExamSidebar from "./ExamSidebar"
 import { Outlet, useParams } from "react-router-dom"
 import { useAuth } from "@/AuthProvider";
@@ -94,6 +94,8 @@ const StudentExam = () => {
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex justify-between items-center gap-2 px-6">
             <h2 className="text-2xl font-semibold tracking-wide">{studentExam?.exam_id?.title}</h2>
+
+            <SidebarTrigger className="-ml-1 animate-pulse" />
           </div>
         </header>
         <div className="flex flex-1 flex-col justify-between gap-4 p-6 md:p-12 pt-4 bg-gray-50">

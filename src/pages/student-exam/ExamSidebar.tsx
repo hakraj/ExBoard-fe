@@ -11,6 +11,12 @@ import { DialogHeader, DialogFooter } from '@/components/ui/dialog'
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@radix-ui/react-dialog'
 import { Loader2 } from 'lucide-react'
 
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60)
+  const secs = seconds % 60
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
+}
+
 
 const ConfirmSubmit = ({ isLoading, timeLeft, handleSubmit }: { isLoading: Boolean, timeLeft: number, handleSubmit: () => Promise<void> }) => {
 
@@ -26,18 +32,18 @@ const ConfirmSubmit = ({ isLoading, timeLeft, handleSubmit }: { isLoading: Boole
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>Your examination duration remains <strong>{timeLeft}</strong>!</DialogDescription>
+          <DialogDescription>Your examination duration remains <strong>{formatTime(timeLeft)}</strong>!</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant={'outline'}>Cancel</Button>
+            <Button type="button" size={'sm'} variant={'outline'}>Cancel</Button>
           </DialogClose>
           {isLoading ?
-            <Button disabled className="cursor-progress" variant={'default'}>
+            <Button disabled size={'sm'} className="cursor-progress" variant={'default'}>
               <Loader2 className="animate-spin" />
               Submitting
             </Button> :
-            <Button type="button" onClick={() => handleSubmit()} variant={'destructive'}>Delete</Button>
+            <Button type="button" size={'sm'} onClick={() => handleSubmit()} variant={'default'}>Submit</Button>
           }
         </DialogFooter>
       </DialogContent>
@@ -76,11 +82,6 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
     }
   }, [timeLeft, studentExam])
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
-  }
 
   const handleSubmit = async () => {
     setIsLoading(true)
