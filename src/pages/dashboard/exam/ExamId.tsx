@@ -20,15 +20,15 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 
 const Question = ({ exam, fetchExam, question, index }: { index: number, exam?: IExam, question: IQuestion, fetchExam: () => Promise<void> }) => {
-  const [dropdown, setDropdown] = useState<Boolean>(true);
+  const [dropdown, setDropdown] = useState<Boolean>(false);
   return (
     <Card>
       <CardHeader>
         <CardTitle>Question {index + 1}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex ">
-          <div className="flex flex-col flex-1">
+        <div className="flex">
+          <div className="flex flex-col gap-2 flex-1">
             <div>
               {question.text}
             </div>
@@ -639,7 +639,6 @@ const ExamId = () => {
           message: string,
           data: IExam,
         }>) => {
-          console.log(response);
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -754,7 +753,7 @@ const ExamId = () => {
         <p className=" font-light text-lg tracking-tight leading-normal">{exam?.description}</p>
         <p className="mt-2 font-medium">{exam?.questions.length} Questions</p>
       </div>
-      <div className="p-2 md:p-4 flex flex-col space-y-2">
+      <div className="p-2 md:p-4 flex flex-col space-y-2 max-h-[80vh]">
         {questions.map((question, index) => {
           return <Question key={question._id}
             index={index} question={question}
