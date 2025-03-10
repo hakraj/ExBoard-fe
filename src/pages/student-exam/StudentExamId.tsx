@@ -1,5 +1,5 @@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -13,7 +13,7 @@ import { useAuth } from '@/AuthProvider'
 
 const StudentExamId = () => {
   const { user } = useAuth();
-  const [questions, exam_id, fResponses, fetchStudentExam]: [IQuestion[], string, IResponse[], () => Promise<void>] = useOutletContext()
+  const [questions, exam_id, fetchStudentExam]: [IQuestion[], string, () => Promise<void>] = useOutletContext()
 
   const [active, setActive] = useState(0)
 
@@ -23,10 +23,10 @@ const StudentExamId = () => {
     selected_option: "",
   })
 
-  const [userResponses, setUserResponses] = useState<IResponse[]>(fResponses)
+  const [userResponses, setUserResponses] = useState<IResponse[]>([])
 
   const findResponse = () => {
-    const foundResponse = userResponses.find((r) => r.question_id === questions[active]?._id)
+    const foundResponse = userResponses?.find((r) => r.question_id === questions[active]?._id)
     if (foundResponse) {
       return { found: true, foundResponse }
     }
@@ -49,8 +49,9 @@ const StudentExamId = () => {
           }>) => {
             //create a toast message feedback 
             if (response.data?.success) {
-              setUserResponses((prev) => [...prev, newResponse])
               await fetchStudentExam()
+              setUserResponses((prev) => [newResponse, ...prev])
+
             } else {
               toast({
                 variant: "destructive",
@@ -78,6 +79,14 @@ const StudentExamId = () => {
       selected_option: "",
     })
   }
+
+  useEffect(() => {
+    findResponse()
+
+    return () => {
+      // setFetching(false)
+    }
+  }, [])
 
   return (
     <>
@@ -113,12 +122,12 @@ const StudentExamId = () => {
           }}>Next <ChevronRight /></Button>
         </div>
         <div className='flex justify-center items-center my-4 gap-1 '>
-          {questions.map((_, index) => {
+          {questions.map((question, index) => {
             return (
               <Button key={index} onClick={() => {
                 handleResponse()
                 setActive(index)
-              }} size={'sm'} variant={active === index || findResponse()?.found ? 'default' : 'ghost'}>{index + 1}</Button>
+              }} size={'sm'} variant={active === index || userResponses?.find((r) => r.question_id === question._id) ? 'default' : 'ghost'}>{index + 1}</Button>
             )
           })}
         </div>

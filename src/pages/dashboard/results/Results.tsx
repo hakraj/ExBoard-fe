@@ -72,8 +72,9 @@ const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthRes
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>This will permanently delete
-            {/* <strong>{result.student_id.name}'s{result.exam_id.title}</strong> Exam.  */}
-            This action cannot be undone.</DialogDescription>
+            <strong>{result.student_id.name}'s {result.exam_id.title}</strong> Exam.
+            This action cannot be undone.
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
@@ -119,7 +120,6 @@ const Results = () => {
             if (response.data?.success) {
               const fetchedUsers = response.data?.data
               setResults(fetchedUsers)
-
             } else {
               toast({
                 variant: "destructive",
@@ -213,7 +213,7 @@ const Results = () => {
                   return (
                     <TableRow key={result._id}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell width={'240px'} className="font-semibold">{result.student_id.name}</TableCell>
+                      <TableCell className="font-semibold">{result.student_id.name}</TableCell>
                       <TableCell>{result.student_id.reg_no}</TableCell>
                       <TableCell>{result.exam_id.title}</TableCell>
                       <TableCell>{result.score}</TableCell>

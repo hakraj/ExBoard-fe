@@ -69,7 +69,6 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
       settimeLeft(remainingTime)
 
       if (remainingTime === 0) {
-        clearInterval(timer)
         handleSubmit()
       }
     }

@@ -546,7 +546,7 @@ const Exam = () => {
                 return (
                   <TableRow key={index}>
                     <Link to={`/dashboard/exam/${exam._id}`}>
-                      <TableCell width={'128px'} className="font-semibold">{exam.title}</TableCell>
+                      <TableCell className="font-semibold">{exam.title}</TableCell>
                     </Link>
                     <TableCell>{exam.questions.length}</TableCell>
                     <TableCell>{exam.created_by.name}</TableCell>
