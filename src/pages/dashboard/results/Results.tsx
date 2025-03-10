@@ -18,7 +18,6 @@ const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthRes
 
   const deleteExamHandler = async () => {
     setIsLoading(true)
-    console.log(result._id);
 
     //API logic
     try {

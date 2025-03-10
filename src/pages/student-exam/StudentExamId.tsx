@@ -7,20 +7,30 @@ import { IQuestion } from "../dashboard/exam/Exam";
 import { useOutletContext } from 'react-router-dom'
 import { toast } from '@/hooks/use-toast'
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { IStudentExam } from './StudentExam'
+import { IResponse, IStudentExam } from './StudentExam'
 import { useAuth } from '@/AuthProvider'
 
 
 const StudentExamId = () => {
   const { user } = useAuth();
-  const [questions, exam_id, fetchStudentExam]: [IQuestion[], string, () => Promise<void>] = useOutletContext()
+  const [questions, exam_id, fResponses, fetchStudentExam]: [IQuestion[], string, IResponse[], () => Promise<void>] = useOutletContext()
 
   const [active, setActive] = useState(0)
 
   const [newResponse, setnewResponse] = useState({
+    _id: "",
     question_id: "",
     selected_option: "",
   })
+
+  const [userResponses, setUserResponses] = useState<IResponse[]>(fResponses)
+
+  const findResponse = () => {
+    const foundResponse = userResponses.find((r) => r.question_id === questions[active]?._id)
+    if (foundResponse) {
+      return { found: true, foundResponse }
+    }
+  }
 
   const handleResponse = async () => {
     console.log(newResponse);
@@ -39,6 +49,7 @@ const StudentExamId = () => {
           }>) => {
             //create a toast message feedback 
             if (response.data?.success) {
+              setUserResponses((prev) => [...prev, newResponse])
               await fetchStudentExam()
             } else {
               toast({
@@ -62,11 +73,11 @@ const StudentExamId = () => {
     }
 
     setnewResponse({
+      _id: "",
       question_id: "",
       selected_option: "",
     })
   }
-
 
   return (
     <>
@@ -76,7 +87,7 @@ const StudentExamId = () => {
           <p className='my-1 text-xl'>{questions[active]?.text}</p>
         </div>
         <div>
-          <RadioGroup onValueChange={(value) => setnewResponse({ question_id: questions[active]?._id, selected_option: value })} value={newResponse.selected_option}>
+          <RadioGroup onValueChange={(value) => setnewResponse({ _id: "", question_id: questions[active]?._id, selected_option: value })} value={newResponse.selected_option ? newResponse.selected_option : findResponse()?.foundResponse.selected_option}>
             {questions[active]?.options.map((option, index) => {
               if (option !== "") {
                 return (
@@ -107,7 +118,7 @@ const StudentExamId = () => {
               <Button key={index} onClick={() => {
                 handleResponse()
                 setActive(index)
-              }} size={'sm'} variant={active === index ? 'default' : 'ghost'}>{index + 1}</Button>
+              }} size={'sm'} variant={active === index || findResponse()?.found ? 'default' : 'ghost'}>{index + 1}</Button>
             )
           })}
         </div>
