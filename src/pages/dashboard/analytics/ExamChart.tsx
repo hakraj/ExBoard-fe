@@ -16,16 +16,16 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-  { week: "1", attempts: 186, },
-  { week: "2", attempts: 305, },
-  { week: "3", attempts: 237, },
-  { week: "4", attempts: 73, },
+  { week: "1", attempts: 10, },
+  { week: "2", attempts: 8, },
+  { week: "3", attempts: 20, },
+  { week: "4", attempts: 5, },
 ]
 
 const chartConfig = {
   attempts: {
     label: "Attempts",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-2))",
   },
   // mobile: {
   //   label: "Mobile",
@@ -41,7 +41,7 @@ export default function ExamChart() {
         <CardDescription>March 2025</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className='min-h-[400px] w-full'>
+        <ChartContainer config={chartConfig} className="max-h-[400px] w-full">
           <LineChart
             accessibilityLayer
             data={chartData}
@@ -82,7 +82,7 @@ export default function ExamChart() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div> */}
         <div className="leading-none text-muted-foreground">
-          Showing total exam attempts for the current month - March 2025
+          Showing total exam attempts per week for the current month - March 2025
         </div>
       </CardFooter>
     </Card>

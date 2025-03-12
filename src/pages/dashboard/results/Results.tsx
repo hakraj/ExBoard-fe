@@ -217,7 +217,7 @@ const Results = () => {
                       <TableCell>{result.student_id.name}</TableCell>
                       <TableCell>{result.student_id.reg_no}</TableCell>
                       <Link to={`/dashboard/results/${result._id}`}>
-                        <TableCell className="font-semibold">{result.exam_id.title}</TableCell>
+                        <TableCell className="font-semibold">{result.exam_id?.title}</TableCell>
                       </Link>
                       <TableCell>{result.score}</TableCell>
                       <TableCell>
@@ -248,7 +248,7 @@ const Results = () => {
                     <TableRow key={result._id}>
                       <TableCell>{index + 1}</TableCell>
                       <Link to={`/dashboard/results/${result._id}`}>
-                        <TableCell width={'240px'} className="font-semibold">{result.exam_id.title}</TableCell>
+                        <TableCell width={'240px'} className="font-semibold">{result.exam_id?.title}</TableCell>
                       </Link>
                       <TableCell>{result.student_id.reg_no}</TableCell>
                       <TableCell>{result.score}</TableCell>

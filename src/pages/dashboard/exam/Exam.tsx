@@ -451,6 +451,7 @@ const Exam = () => {
   const { user } = useAuth();
 
   const [exams, setExams] = useState<IExam[]>([])
+  const [select, setselect] = useState('latest')
 
   const navigate = useNavigate()
   const { toast } = useToast()
@@ -515,18 +516,19 @@ const Exam = () => {
         <div className="max-md:self-start">
           <p className="font-light text-lg tracking-tight leading-normal">A list of all available exams</p>
         </div>
-        <div className="inline-flex max-md:self-end items-center space-x-2 max-md:mt-4 m-1">
-          <Select>
-            <SelectTrigger>
-              <SelectValue defaultValue="latest" placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="latest">Latest</SelectItem>
-              <SelectItem value="publish">Published</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
+        {user.role == "admin" &&
+          <div className="inline-flex max-md:self-end items-center space-x-2 max-md:mt-4 m-1">
+            <Select onValueChange={(value) => setselect(value)}>
+              <SelectTrigger>
+                <SelectValue defaultValue={select} placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="latest">Latest</SelectItem>
+                <SelectItem value="publish">Published</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        }
       </div>
       <div className="p-2 md:p-4">
         {user.role == "admin" ?
@@ -541,30 +543,51 @@ const Exam = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {exams.map((exam, index) => {
+              {exams?.map((exam, index) => {
                 const { hours, mins } = changeMinToHour(exam.time_limit)
-                return (
-                  <TableRow key={index}>
-                    <Link to={`/dashboard/exam/${exam._id}`}>
-                      <TableCell className="font-semibold">{exam.title}</TableCell>
-                    </Link>
-                    <TableCell>{exam.questions.length}</TableCell>
-                    <TableCell>{exam.created_by.name}</TableCell>
-                    <TableCell>{hours > 0 ? `${hours}hours ${mins}mins` : `${mins} mins`}</TableCell>
-                    <TableCell>
-                      <div className="inline-flex items-center space-x-1">
-                        <UpdateExam exam={exam} fetchExams={fetchExams} />
-                        <DeleteExam exam={exam} fetchExams={fetchExams} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                )
+                if (select === 'published') {
+                  if (exam.is_published) {
+                    return (
+                      <TableRow key={index}>
+                        <Link to={`/dashboard/exam/${exam._id}`}>
+                          <TableCell className="font-semibold">{exam.title}</TableCell>
+                        </Link>
+                        <TableCell>{exam.questions.length}</TableCell>
+                        <TableCell>{exam.created_by.name}</TableCell>
+                        <TableCell>{hours > 0 ? `${hours}hours ${mins}mins` : `${mins} mins`}</TableCell>
+                        <TableCell>
+                          <div className="inline-flex items-center space-x-1">
+                            <UpdateExam exam={exam} fetchExams={fetchExams} />
+                            <DeleteExam exam={exam} fetchExams={fetchExams} />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  }
+                } else {
+                  return (
+                    <TableRow key={index}>
+                      <Link to={`/dashboard/exam/${exam._id}`}>
+                        <TableCell className="font-semibold">{exam.title}</TableCell>
+                      </Link>
+                      <TableCell>{exam.questions.length}</TableCell>
+                      <TableCell>{exam.created_by.name}</TableCell>
+                      <TableCell>{hours > 0 ? `${hours}hours ${mins}mins` : `${mins} mins`}</TableCell>
+                      <TableCell>
+                        <div className="inline-flex items-center space-x-1">
+                          <UpdateExam exam={exam} fetchExams={fetchExams} />
+                          <DeleteExam exam={exam} fetchExams={fetchExams} />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )
+                }
               })}
             </TableBody>
           </Table>
           :
           <div className="grid sm:grid-cols-2 lg:grid-cols-3  xl:data-[state=open]:grid-cols-3 gap-4">
-            {exams.map((exam, index) => {
+            {exams?.map((exam, index) => {
               const { hours, mins } = changeMinToHour(exam.time_limit)
 
               if (exam.is_published) {
