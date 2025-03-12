@@ -45,10 +45,9 @@ export const resetPasswordSchema = z.object({
 // Exam Schema
 export const examSchema = z.object({
   title: z.string()
-    .min(3, { message: 'Title must be at least 3 characters' })
-    .max(32, { message: 'Title must be at most 32 characters' }),
+    .min(3, { message: 'Title must be at least 3 characters' }),
   description: z.string()
-    .max(128, { message: 'Description must be at most 128 characters' })
+    .max(256, { message: 'Description must be at most 128 characters' })
     .optional(),
   time_limit: z.coerce.number()
     .min(5, { message: 'Exam time must be at least 5 mins' })

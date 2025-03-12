@@ -39,7 +39,7 @@ const Question = ({ exam, fetchExam, question, index }: { index: number, exam?: 
                     question.options.map((option, index) => {
                       if (option !== "") {
                         return (
-                          <div key={index} className="flex items-center space-x-2" >
+                          <div key={index} className="flex items-center space-x-2 p-1" >
                             <RadioGroupItem disabled value={option} id={`option${index + 1}`} />
                             <Label htmlFor={`option${index + 1}`} >{option}</Label>
                           </div>
@@ -687,7 +687,6 @@ const ExamId = () => {
           //create a toast message feedback 
           if (response.data?.success) {
             const fetchedExam = response.data?.data;
-            console.log(fetchedExam)
             setExam(fetchedExam)
             setQuestions(fetchedExam.questions)
           } else {
@@ -753,7 +752,7 @@ const ExamId = () => {
         <p className=" font-light text-lg tracking-tight leading-normal">{exam?.description}</p>
         <p className="mt-2 font-medium">{exam?.questions.length} Questions</p>
       </div>
-      <div className="p-2 md:p-4 flex flex-col space-y-2 max-h-[80vh]">
+      <div className="p-2 md:p-4 flex flex-col space-y-2">
         {questions.map((question, index) => {
           return <Question key={question._id}
             index={index} question={question}

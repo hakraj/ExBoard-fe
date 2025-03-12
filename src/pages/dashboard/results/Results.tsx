@@ -7,6 +7,7 @@ import { IStudentExam } from '@/pages/student-exam/StudentExam';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Trash2, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 
 const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthResults: () => Promise<void> }) => {
@@ -213,9 +214,11 @@ const Results = () => {
                   return (
                     <TableRow key={result._id}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell className="font-semibold">{result.student_id.name}</TableCell>
+                      <TableCell>{result.student_id.name}</TableCell>
                       <TableCell>{result.student_id.reg_no}</TableCell>
-                      <TableCell>{result.exam_id.title}</TableCell>
+                      <Link to={`/dashboard/results/${result._id}`}>
+                        <TableCell className="font-semibold">{result.exam_id.title}</TableCell>
+                      </Link>
                       <TableCell>{result.score}</TableCell>
                       <TableCell>
                         <DeleteResult result={result} fecthResults={fecthResults} />
@@ -244,7 +247,9 @@ const Results = () => {
                   return (
                     <TableRow key={result._id}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell width={'240px'} className="font-semibold">{result.exam_id.title}</TableCell>
+                      <Link to={`/dashboard/results/${result._id}`}>
+                        <TableCell width={'240px'} className="font-semibold">{result.exam_id.title}</TableCell>
+                      </Link>
                       <TableCell>{result.student_id.reg_no}</TableCell>
                       <TableCell>{result.score}</TableCell>
                       <TableCell>{(result.score / result.exam_id.questions.length) * 100}%</TableCell>
