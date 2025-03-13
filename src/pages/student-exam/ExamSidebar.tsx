@@ -102,7 +102,6 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
               description: response?.data?.message
             })
 
-            navigate('/student-exam/complete')
           } else {
             toast({
               variant: "destructive",
@@ -118,11 +117,11 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
             description: err.response?.data?.message
           })
         })
-
     } catch (error) {
       console.error('Caught an error: ', error)
     }
 
+    navigate('/student-exam/complete')
     setIsLoading(false)
   }
 

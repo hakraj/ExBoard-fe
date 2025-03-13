@@ -33,7 +33,6 @@ const StudentExamId = () => {
   }
 
   const handleResponse = async () => {
-    console.log(newResponse);
 
     if (newResponse.question_id && newResponse.selected_option) {
       try {
@@ -111,7 +110,7 @@ const StudentExamId = () => {
         </div>
       </div>
       <div>
-        <div className='flex justify-between px-8'>
+        <div className='flex justify-between px-4 md:px-8'>
           <Button disabled={active <= 0} onClick={() => {
             handleResponse()
             setActive(active - 1)
@@ -121,7 +120,7 @@ const StudentExamId = () => {
             setActive(active + 1)
           }}>Next <ChevronRight /></Button>
         </div>
-        <div className='flex justify-center items-center my-4 gap-1 '>
+        <div className='flex justify-center items-center my-4 gap-1 w-full overflow-scroll overflow-x-scroll'>
           {questions.map((question, index) => {
             return (
               <Button key={index} onClick={() => {

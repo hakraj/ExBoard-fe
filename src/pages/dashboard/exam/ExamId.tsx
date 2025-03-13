@@ -109,7 +109,7 @@ const CreateQuestion = ({ exam, fetchExam }: { exam?: IExam, fetchExam: () => Pr
           message: string,
           data: IQuestion[],
         }>) => {
-          console.log(response);
+
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -342,7 +342,7 @@ const UpdateQuestion = ({ exam, question, fetchExam }: { exam?: IExam, question:
           message: string,
           data: IQuestion[],
         }>) => {
-          console.log(response);
+
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -551,7 +551,7 @@ const DeleteQuestion = ({ index, exam, question, fetchExam }: { index: number, e
           message: string,
           // data: Exam,
         }>) => {
-          console.log(response);
+
           //create a toast message feedback 
           if (response.data?.success) {
             toast({

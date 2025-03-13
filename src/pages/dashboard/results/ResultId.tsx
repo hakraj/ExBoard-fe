@@ -131,7 +131,7 @@ const ResultId = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-xl font-semibold tracking-wide">{result?.exam_id && ((result.score / result?.exam_id?.questions.length) * 100)}%</h3>
+          <h3 className="text-xl font-semibold tracking-wide">{result?.exam_id && Math.round((result.score / result?.exam_id?.questions.length) * 100)}%</h3>
         </div>
       </div>
 

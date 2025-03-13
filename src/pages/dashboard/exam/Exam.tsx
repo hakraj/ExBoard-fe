@@ -82,7 +82,6 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
           message: string,
           data: IExam,
         }>) => {
-          console.log(response);
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -238,7 +237,6 @@ const UpdateExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promi
           message: string,
           data: IExam,
         }>) => {
-          console.log(response);
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -386,7 +384,6 @@ const DeleteExam = ({ exam, fetchExams }: { exam: IExam, fetchExams: () => Promi
           message: string,
           // data: Exam,
         }>) => {
-          console.log(response);
           //create a toast message feedback 
           if (response.data?.success) {
             toast({

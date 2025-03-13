@@ -52,11 +52,9 @@ const StudentExam = () => {
           //create a toast message feedback 
           if (response.data?.success) {
             const fetchedExam = response.data?.data;
-            console.log(fetchedExam)
             setStudentExam(fetchedExam)
             setQuestions(fetchedExam?.exam_id?.questions)
 
-            console.log(response, questions);
 
           } else {
             toast({
@@ -91,14 +89,12 @@ const StudentExam = () => {
   return (
     <SidebarProvider>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex justify-between items-center gap-2 px-6">
-            <h2 className="text-2xl font-semibold tracking-wide">{studentExam?.exam_id?.title}</h2>
+        <header className="flex w-screen justify-between h-16 shrink-0 items-start gap-2 px-6 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <h2 className="text-2xl font-semibold tracking-wide">{studentExam?.exam_id?.title}</h2>
 
-            <SidebarTrigger className="-ml-1 animate-pulse" />
-          </div>
+          <SidebarTrigger className="-ml-1 text-red-500 animate-pulse self-center" />
         </header>
-        <div className="flex flex-1 flex-col justify-between gap-4 p-6 md:p-12 pt-4 bg-gray-50">
+        <div className="flex w-screen flex-1 flex-col justify-between gap-4 p-6 md:p-12 pt-4 bg-gray-50">
           <Outlet context={[questions, exam_id, fetchStudentExam]} />
         </div>
       </SidebarInset>

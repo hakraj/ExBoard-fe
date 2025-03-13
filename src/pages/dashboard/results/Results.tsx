@@ -32,7 +32,7 @@ const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthRes
           message: string,
           // data: Exam,
         }>) => {
-          console.log(response);
+          
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
@@ -210,22 +210,22 @@ const Results = () => {
             </TableHeader>
             <TableBody>
               {results.length > 0 && results.map((result, index) => {
-                if (result.completed_at) {
-                  return (
-                    <TableRow key={result._id}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{result.student_id?.name}</TableCell>
-                      <TableCell>{result.student_id?.reg_no}</TableCell>
-                      <Link to={`/dashboard/results/${result._id}`}>
-                        <TableCell className="font-semibold">{result.exam_id?.title}</TableCell>
-                      </Link>
-                      <TableCell>{result.score}</TableCell>
-                      <TableCell>
-                        <DeleteResult result={result} fecthResults={fecthResults} />
-                      </TableCell>
-                    </TableRow>
-                  )
-                }
+                // if (result.completed_at) {
+                return (
+                  <TableRow key={result._id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{result.student_id?.name}</TableCell>
+                    <TableCell>{result.student_id?.reg_no}</TableCell>
+                    <Link to={`/dashboard/results/${result._id}`}>
+                      <TableCell className="font-semibold">{result.exam_id?.title}</TableCell>
+                    </Link>
+                    <TableCell>{result.score}</TableCell>
+                    <TableCell>
+                      <DeleteResult result={result} fecthResults={fecthResults} />
+                    </TableCell>
+                  </TableRow>
+                )
+                // }
               })}
             </TableBody>
           </Table>
@@ -252,7 +252,7 @@ const Results = () => {
                       </Link>
                       <TableCell>{result.student_id?.reg_no}</TableCell>
                       <TableCell>{result.score}</TableCell>
-                      <TableCell>{result.exam_id && ((result.score / result.exam_id.questions.length) * 100)}%</TableCell>
+                      <TableCell>{result.exam_id && Math.round((result.score / result.exam_id.questions.length) * 100)}%</TableCell>
                     </TableRow>
                   )
                 }

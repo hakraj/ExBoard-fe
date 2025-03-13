@@ -92,16 +92,16 @@ const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex justify-between">
         <h1 className="text-2xl font-bold tracking-wide">Analytics</h1>
-        <h2 className="text-xl font-semibold tracking-wide mr-4">Welcome, {user.name}</h2>
+        <h2 className="text-xl font-semibold tracking-wide">Welcome, {user.name}</h2>
       </div>
-      <div className="grid grid-cols-2 gap-x-[5%] ">
+      <div className="md:grid grid-cols-2 gap-x-[5%] ">
         <div>
-          <div className="flex justify-between m-1">
+          <div className="flex justify-between my-1">
             <h2 className="text-xl font-semibold tracking-wide">Users</h2>
             <Button onClick={() => navigate('/dashboard/users')} variant={'outline'}>Manage users</Button>
           </div>
           <hr />
-          <div className="flex items-center my-4 space-x-4">
+          <div className="flex items-center my-4 space-x-1 md:space-x-4">
             <Card>
               <CardHeader>
                 <h3 className='text-xl font-bold'>{users.student + users.educator}</h3>
@@ -123,12 +123,12 @@ const Dashboard = () => {
           </div>
         </div>
         <div>
-          <div className="flex justify-between m-1">
+          <div className="flex justify-between my-1">
             <h2 className="text-xl font-semibold tracking-wide">Exams</h2>
             <Button onClick={() => navigate('/dashboard/exams')} variant={'outline'}>Manage exams</Button>
           </div>
           <hr />
-          <div className="flex items-center my-4 space-x-4">
+          <div className="flex items-center my-4 space-x-1 md:space-x-4">
             <Card>
               <CardHeader>
                 <h3 className='text-xl font-bold'>{exams.published + exams.upcoming}</h3>
@@ -155,12 +155,12 @@ const Dashboard = () => {
         <ResultMetrics data={successrate} />
       </div>
       <div>
-        <div className="flex justify-between m-1">
+        <div className="flex justify-between my-1">
           <h2 className="text-xl font-semibold tracking-wide">Results - Average</h2>
           <Button onClick={() => navigate('/dashboard/results')} variant={'outline'}>Manage results</Button>
         </div>
         <hr />
-        <div className="flex items-center my-4 space-x-4">
+        <div className="flex items-center my-4 space-x-1 md:space-x-4">
           <Card>
             <CardHeader>
               <h3 className='text-xl font-bold'>{averages.averageGrade}%</h3>
@@ -182,7 +182,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="mb-4">
-        <h2 className="text-xl font-semibold tracking-wide m-1">Notification Logs</h2>
+        <h2 className="text-xl font-semibold tracking-wide my-1">Notification Logs</h2>
         <hr />
         <div className="leading-none text-center text-muted-foreground my-2">
           New Notifications will appear here

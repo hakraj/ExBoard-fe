@@ -43,7 +43,7 @@ const Home = () => {
             <BellDot className='mr-5 cursor-pointer' />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-6 md:p-12 pt-4 bg-gray-50">
+        <div className="flex min-h-full overflow-auto flex-1 flex-col gap-4 p-6 md:p-12 pt-4 bg-gray-50">
           <Outlet />
         </div>
       </SidebarInset>

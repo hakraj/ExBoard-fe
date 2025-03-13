@@ -55,7 +55,7 @@ const StartExam = () => {
           token: string,
           data: IStudentExam,
         }>) => {
-          console.log(response);
+
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
