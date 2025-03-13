@@ -18,12 +18,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { ISuccessRate } from "@/lib/types"
 
-const chartData = [
-  { grade: "pass", no: 25, fill: "#22c55e" },
-  { grade: "average", no: 10, fill: "hsl(var(--chart-5))" },
-  { grade: "fail", no: 5, fill: "#ef4444" },
-]
 
 const chartConfig = {
   no: {
@@ -51,7 +47,13 @@ const chartConfig = {
   // },
 } satisfies ChartConfig
 
-export default function Component() {
+export default function Component({ data }: { data: ISuccessRate }) {
+  const chartData = [
+    { grade: "pass", no: data.pass, fill: "#22c55e" },
+    { grade: "average", no: data.average, fill: "hsl(var(--chart-5))" },
+    { grade: "fail", no: data.fail, fill: "#ef4444" },
+  ]
+
   const totalAttempts = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.no, 0)
   }, [])

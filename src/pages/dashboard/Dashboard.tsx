@@ -4,11 +4,89 @@ import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import ExamChart from "./analytics/ExamChart";
 import ResultMetrics from "./analytics/ResultMetrics";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import { useState, useEffect } from "react";
+import { IAnalytics } from "@/lib/types";
 
 
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate()
+  const { toast } = useToast()
+
+  const [analytics, setAnalytics] = useState<IAnalytics>({
+    users: {
+      student: 0,
+      educator: 0,
+    },
+    exams: {
+      published: 0,
+      upcoming: 0,
+    },
+    examChartdata: [{
+      week: 0,
+      attempts: 0,
+    }],
+    successrate: {
+      pass: 0,
+      average: 0,
+      fail: 0,
+    },
+    averages: {
+      averageGrade: 0,
+      noOfAttemptsPerExam: 0,
+      averageCompletionTime: 0,
+    },
+  })
+
+  const { users, exams, examChartdata, successrate, averages } = analytics;
+
+  const fetchAnalytics = async () => {
+    try {
+      await axios.get(`https://ex-board.vercel.app/analytics`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
+        .then((response: AxiosResponse<{
+          success: boolean,
+          message: string,
+          data: IAnalytics
+        }>) => {
+          //create a toast message feedback 
+          if (response.data?.success) {
+            const fetchedData = response.data?.data;
+            setAnalytics(fetchedData)
+          } else {
+            toast({
+              variant: "destructive",
+              title: "Failed to fetch result!",
+              description: response?.data?.message
+            })
+          }
+        }).catch((err: AxiosError<{ message: string }>) => {
+          console.error(err)
+          return toast({
+            variant: "destructive",
+            title: "Request Error!",
+            description: err.response?.data?.message
+          })
+        })
+
+    } catch (error) {
+      console.error('Caught an error: ', error)
+    }
+  }
+
+
+  useEffect(() => {
+    fetchAnalytics()
+
+    return () => {
+      // setFetching(false)
+    }
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -26,19 +104,19 @@ const Dashboard = () => {
           <div className="flex items-center my-4 space-x-4">
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>10</h3>
+                <h3 className='text-xl font-bold'>{users.student + users.educator}</h3>
               </CardHeader>
               <CardFooter>Total users</CardFooter>
             </Card>
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>2</h3>
+                <h3 className='text-xl font-bold'>{users.educator}</h3>
               </CardHeader>
               <CardFooter>Educators</CardFooter>
             </Card>
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>8</h3>
+                <h3 className='text-xl font-bold'>{users.student}</h3>
               </CardHeader>
               <CardFooter>Students</CardFooter>
             </Card>
@@ -53,19 +131,19 @@ const Dashboard = () => {
           <div className="flex items-center my-4 space-x-4">
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>10</h3>
+                <h3 className='text-xl font-bold'>{exams.published + exams.upcoming}</h3>
               </CardHeader>
               <CardFooter>Total exams</CardFooter>
             </Card>
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>2</h3>
+                <h3 className='text-xl font-bold'>{exams.published}</h3>
               </CardHeader>
               <CardFooter>published</CardFooter>
             </Card>
             <Card>
               <CardHeader>
-                <h3 className='text-xl font-bold'>8</h3>
+                <h3 className='text-xl font-bold'>{exams.upcoming}</h3>
               </CardHeader>
               <CardFooter>upcoming</CardFooter>
             </Card>
@@ -73,8 +151,8 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="space-y-4">
-        <ExamChart />
-        <ResultMetrics />
+        <ExamChart data={examChartdata} />
+        <ResultMetrics data={successrate} />
       </div>
       <div>
         <div className="flex justify-between m-1">
@@ -85,19 +163,19 @@ const Dashboard = () => {
         <div className="flex items-center my-4 space-x-4">
           <Card>
             <CardHeader>
-              <h3 className='text-xl font-bold'>50%</h3>
+              <h3 className='text-xl font-bold'>{averages.averageGrade}%</h3>
             </CardHeader>
             <CardFooter>Score</CardFooter>
           </Card>
           <Card>
             <CardHeader>
-              <h3 className='text-xl font-bold'>10</h3>
+              <h3 className='text-xl font-bold'>{Math.ceil(averages.noOfAttemptsPerExam)}</h3>
             </CardHeader>
             <CardFooter>Attempts per exam</CardFooter>
           </Card>
           <Card>
             <CardHeader>
-              <h3 className='text-xl font-bold'>30 mins</h3>
+              <h3 className='text-xl font-bold'>{averages.averageCompletionTime} mins</h3>
             </CardHeader>
             <CardFooter>Completion time</CardFooter>
           </Card>

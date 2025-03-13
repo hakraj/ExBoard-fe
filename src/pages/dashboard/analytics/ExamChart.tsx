@@ -15,12 +15,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const chartData = [
-  { week: "1", attempts: 10, },
-  { week: "2", attempts: 8, },
-  { week: "3", attempts: 20, },
-  { week: "4", attempts: 5, },
-]
 
 const chartConfig = {
   attempts: {
@@ -33,7 +27,7 @@ const chartConfig = {
   // },
 } satisfies ChartConfig
 
-export default function ExamChart() {
+export default function ExamChart({ data }: { data: any[] }) {
   return (
     <Card>
       <CardHeader>
@@ -44,7 +38,7 @@ export default function ExamChart() {
         <ChartContainer config={chartConfig} className="max-h-[400px] w-full">
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               left: 12,
               right: 12,
