@@ -106,7 +106,7 @@ const Dashboard = () => {
       <div className="mb-4">
         <h2 className="text-xl font-semibold tracking-wide m-1">Notification Logs</h2>
         <hr />
-        <div className="leading-none text-center text-muted-foreground">
+        <div className="leading-none text-center text-muted-foreground my-2">
           New Notifications will appear here
         </div>
       </div>

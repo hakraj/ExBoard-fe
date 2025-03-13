@@ -61,7 +61,7 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
 
   useEffect(() => {
     const startedAt = new Date(studentExam?.started_at as Date).getTime();
-    const endTime = startedAt + (studentExam?.exam_id.time_limit as number * 60 * 1000);
+    const endTime = startedAt + (studentExam?.exam_id?.time_limit as number * 60 * 1000);
 
     const updateTimer = () => {
       const now = Date.now();
@@ -137,8 +137,8 @@ const ExamSidebar = ({ studentExam }: { studentExam?: IStudentExam }) => {
       <SidebarContent>
         <div className='flex flex-1 justify-center items-center text-center text-lg p-4 '>
           <div>
-            <p>{studentExam?.exam_id.description}</p>
-            <p><b>{studentExam?.responses.length}</b> out of <b>{studentExam?.exam_id.questions.length}</b> questions</p>
+            <p>{studentExam?.exam_id?.description}</p>
+            <p><b>{studentExam?.responses.length}</b> out of <b>{studentExam?.exam_id?.questions.length}</b> questions</p>
           </div>
         </div>
       </SidebarContent>

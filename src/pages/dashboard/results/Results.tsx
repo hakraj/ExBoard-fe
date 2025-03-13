@@ -73,7 +73,7 @@ const DeleteResult = ({ result, fecthResults }: { result: IStudentExam, fecthRes
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>This will permanently delete
-            <strong>{result.student_id.name}'s {result.exam_id.title}</strong> Exam.
+            <strong>{result.student_id?.name}'s {result.exam_id?.title}</strong> Exam.
             This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
@@ -214,8 +214,8 @@ const Results = () => {
                   return (
                     <TableRow key={result._id}>
                       <TableCell>{index + 1}</TableCell>
-                      <TableCell>{result.student_id.name}</TableCell>
-                      <TableCell>{result.student_id.reg_no}</TableCell>
+                      <TableCell>{result.student_id?.name}</TableCell>
+                      <TableCell>{result.student_id?.reg_no}</TableCell>
                       <Link to={`/dashboard/results/${result._id}`}>
                         <TableCell className="font-semibold">{result.exam_id?.title}</TableCell>
                       </Link>
@@ -250,9 +250,9 @@ const Results = () => {
                       <Link to={`/dashboard/results/${result._id}`}>
                         <TableCell width={'240px'} className="font-semibold">{result.exam_id?.title}</TableCell>
                       </Link>
-                      <TableCell>{result.student_id.reg_no}</TableCell>
+                      <TableCell>{result.student_id?.reg_no}</TableCell>
                       <TableCell>{result.score}</TableCell>
-                      <TableCell>{(result.score / result.exam_id.questions.length) * 100}%</TableCell>
+                      <TableCell>{result.exam_id && ((result.score / result.exam_id.questions.length) * 100)}%</TableCell>
                     </TableRow>
                   )
                 }

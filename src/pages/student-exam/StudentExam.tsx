@@ -15,12 +15,12 @@ export interface IResponse {
 }
 
 export interface IStudentExam {
-  student_id: IUser;
-  exam_id: IExam;
+  student_id: IUser | null;
+  exam_id: IExam | null;
   responses: IResponse[];
   score: number;
   started_at: Date,
-  completed_at: Date,
+  completed_at: Date | null,
   _id: string;
 }
 
@@ -32,7 +32,7 @@ const StudentExam = () => {
 
   const [studentExam, setStudentExam] = useState<IStudentExam>()
 
-  const [questions, setQuestions] = useState<IQuestion[]>([])
+  const [questions, setQuestions] = useState<IQuestion[] | undefined>([])
 
   // const [fetching, setFetching] = useState<boolean>(true);
 

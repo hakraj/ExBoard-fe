@@ -114,34 +114,34 @@ const ResultId = () => {
     <div>
       <div className='flex items-center justify-between'>
         <div>
-          <h2 className="text-2xl font-semibold tracking-wide">{result?.student_id.name}</h2>
+          <h2 className="text-2xl font-semibold tracking-wide">{result?.student_id?.name}</h2>
           <div className="flex max-md:flex-col items-center m-1 md:space-x-2">
             <div className="inline-flex items-center">
               <User className=" size-4 mr-1" />
               <span className="text-sm ">
-                {result?.student_id.reg_no}
+                {result?.student_id?.reg_no}
               </span>
             </div>
             <div className="inline-flex items-center max-md:self-start">
               <Mail className=" size-4 mr-1" />
               <span className="text-sm ">
-                {result?.student_id.email}
+                {result?.student_id?.email}
               </span>
             </div>
           </div>
         </div>
         <div>
-          <h3 className="text-xl font-semibold tracking-wide">{result && ((result.score / result.exam_id.questions.length) * 100)}%</h3>
+          <h3 className="text-xl font-semibold tracking-wide">{result?.exam_id && ((result.score / result?.exam_id?.questions.length) * 100)}%</h3>
         </div>
       </div>
 
       <div className="p-2 md:p-4 md:w-3/4">
-        <p className=" text-lg tracking-tight leading-normal font-medium">{result?.exam_id.title}</p>
-        <p className=" font-light mt-2">{result?.exam_id.questions.length} Questions</p>
+        <p className=" text-lg tracking-tight leading-normal font-medium">{result?.exam_id?.title}</p>
+        <p className=" font-light mt-2">{result?.exam_id?.questions.length} Questions</p>
       </div>
 
       <div className="p-2 md:p-4 mb-5 flex flex-col space-y-2 ">
-        {result?.exam_id.questions.map((question, index) => {
+        {result?.exam_id?.questions.map((question, index) => {
           return <Question key={question._id}
             index={index} question={question}
             response={result?.responses.find((r) => r.question_id === question._id)} />
