@@ -18,7 +18,7 @@ const formatTime = (seconds: number) => {
 }
 
 
-const ConfirmSubmit = ({ isLoading, timeLeft, handleSubmit }: { isLoading: Boolean, timeLeft: number, handleSubmit: () => Promise<void> }) => {
+const ConfirmSubmit = ({ isLoading, timeLeft, handleSubmit }: { isLoading: boolean, timeLeft: number, handleSubmit: () => Promise<void> }) => {
 
   const [open, setOpen] = useState<boolean>(false);
 

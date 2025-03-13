@@ -1,6 +1,3 @@
-"use client"
-
-import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -54,9 +51,7 @@ export default function Component({ data }: { data: ISuccessRate }) {
     { grade: "fail", no: data.fail, fill: "#ef4444" },
   ]
 
-  const totalAttempts = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.no, 0)
-  }, [])
+  const totalAttempts = chartData.reduce((acc, curr) => acc + curr.no, 0)
 
   return (
     <Card className="flex flex-col">
@@ -96,7 +91,7 @@ export default function Component({ data }: { data: ISuccessRate }) {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalAttempts.toLocaleString()}
+                          {totalAttempts}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

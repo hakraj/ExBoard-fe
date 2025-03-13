@@ -46,11 +46,11 @@ export default function ExamChart({ data }: { data: any[] }) {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="day"
-              tickLine={false}
+              dataKey="week"
+              tickLine={true}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => `week ${value}`}
             />
             <ChartTooltip
               cursor={false}

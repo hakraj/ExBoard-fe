@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 
 const Question = ({ response, question, index }: { index: number, response?: IResponse, question: IQuestion }) => {
-  const [dropdown, setDropdown] = useState<Boolean>(false);
+  const [dropdown, setDropdown] = useState<boolean>(false);
   return (
     <Card>
       <CardHeader>
@@ -109,7 +109,7 @@ const ResultId = () => {
     return () => {
       // setFetching(false)
     }
-  }, [])
+  })
   return (
     <div>
       <div className='flex items-center justify-between'>

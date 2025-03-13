@@ -86,7 +86,7 @@ const StudentExamId = () => {
     return () => {
       // setFetching(false)
     }
-  }, [])
+  })
 
   return (
     <>

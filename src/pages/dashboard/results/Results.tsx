@@ -187,7 +187,7 @@ const Results = () => {
     return () => {
       // setFetching(false)
     }
-  }, [])
+  })
   return (
     <div>
       <div>

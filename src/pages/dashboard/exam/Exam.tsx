@@ -503,7 +503,7 @@ const Exam = () => {
     return () => {
       // setFetching(false)
     }
-  }, [])
+  })
 
 
   return (
