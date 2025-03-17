@@ -95,7 +95,7 @@ const StudentExamId = () => {
           <p className='my-1 text-xl'>{questions[active]?.text}</p>
         </div>
         <div>
-          <RadioGroup onValueChange={(value) => setnewResponse({ _id: "", question_id: questions[active]?._id, selected_option: value })} value={newResponse.selected_option ? newResponse.selected_option : findResponse()?.foundResponse.selected_option}>
+          <RadioGroup onValueChange={(value: any) => setnewResponse({ _id: "", question_id: questions[active]?._id, selected_option: value })} value={newResponse.selected_option ? newResponse.selected_option : findResponse()?.foundResponse.selected_option}>
             {questions[active]?.options.map((option, index) => {
               if (option !== "") {
                 return (
@@ -120,7 +120,7 @@ const StudentExamId = () => {
             setActive(active + 1)
           }}>Next <ChevronRight /></Button>
         </div>
-        <div className='flex justify-center items-center my-4 gap-1 w-full overflow-scroll overflow-x-scroll'>
+        <div className='question-grid mt-4'>
           {questions.map((question, index) => {
             return (
               <Button key={index} onClick={() => {

@@ -89,12 +89,12 @@ const StudentExam = () => {
   return (
     <SidebarProvider>
       <SidebarInset>
-        <header className="flex w-screen justify-between h-16 shrink-0 items-start gap-2 px-6 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header className="flex w-[calc(100vw-17rem)] max-md:w-screen justify-between h-16 shrink-0 items-start gap-2 px-6 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <h2 className="text-2xl font-semibold tracking-wide">{studentExam?.exam_id?.title}</h2>
 
-          <SidebarTrigger className="-ml-1 text-red-500 animate-pulse self-center" />
+          <SidebarTrigger className="-ml-1 text-red-500 animate-pulse self-center max-md:hidden" />
         </header>
-        <div className="flex w-screen flex-1 flex-col justify-between gap-4 p-6 md:p-12 pt-4 bg-gray-50">
+        <div className="flex w-[calc(100vw-17rem)] max-md:w-screen flex-1 flex-col justify-between gap-4 p-6 md:p-12 pt-4 bg-gray-50">
           <Outlet context={[questions, exam_id, fetchStudentExam]} />
         </div>
       </SidebarInset>

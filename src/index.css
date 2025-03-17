@@ -17,6 +17,12 @@
   backdrop-filter: 8px;
 }
 
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32px, 1fr));
+  gap: 0.25rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

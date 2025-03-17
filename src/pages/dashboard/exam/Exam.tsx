@@ -60,7 +60,7 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
   })
 
   const { user } = useAuth();
-
+  const navigate = useNavigate()
   const { toast } = useToast()
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -95,8 +95,11 @@ const CreatExam = ({ fetchExams }: { fetchExams: () => Promise<void> }) => {
               time_limit: 5,
             })
 
+            const exam = response.data?.data
             setOpen(false)
             fetchExams()
+
+            navigate(`/dashboard/exam/${exam._id}`)
           } else {
             toast({
               variant: "destructive",

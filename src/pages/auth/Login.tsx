@@ -52,12 +52,13 @@ const Login = () => {
           success: boolean,
           message: string,
           user: {
+            _id: string,
             name: string,
             reg_no: string,
-            email: string,
+            email: string
             role: string,
             token: string,
-          }
+          },
         }>) => {
           console.log(response);
           //create a toast message feedback 
@@ -68,7 +69,9 @@ const Login = () => {
             })
 
             login({
+              _id: response?.data?.user._id,
               name: response?.data?.user.name,
+              email: response?.data?.user.email,
               reg_no: response?.data?.user.reg_no,
               role: response?.data?.user.role,
               token: response?.data?.user.token

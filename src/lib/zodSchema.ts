@@ -23,6 +23,13 @@ export const loginSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters' }),
 }).required()
 
+export const updateSchema = z.object({
+  name: z.string()
+    .min(3, { message: 'Name must be at least 3 characters' })
+    .max(50, { message: 'Name must be at most 50 characters' }),
+  email: z.string().email({ message: 'Invalid email address' }),
+}).required()
+
 export const forgetPasswordSchema = z.object({
   reg_no: z.string().regex(/^\d{2}\/[A-Z]{3}\d{3}$/i, { message: 'Registration number must match the format; YY/ABC000' }),
   email: z.string().email({ message: 'Invalid email address' }),

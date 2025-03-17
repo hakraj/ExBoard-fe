@@ -25,12 +25,12 @@ const Question = ({ response, question, index }: { index: number, response?: IRe
             </div>
             {dropdown &&
               <div>
-                <RadioGroup value={question.answer}>
+                <RadioGroup value={response?.selected_option}>
                   {
                     question.options.map((option, index) => {
                       if (option !== "") {
                         return (
-                          <div key={index} className={`flex items-center space-x-2 p-1 rounded ${option === response?.selected_option && option === question.answer && 'bg-green-400'} ${option === response?.selected_option && option !== question.answer && 'bg-red-300'}`} >
+                          <div key={index} className={`flex items-center space-x-2 p-1 rounded ${option === question.answer && 'bg-green-400'} ${option === response?.selected_option && option !== question.answer && 'bg-red-300'}`} >
                             <RadioGroupItem disabled value={option} id={`option${index + 1}`} />
                             <Label htmlFor={`option${index + 1}`} >{option}</Label>
                           </div>

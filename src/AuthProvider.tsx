@@ -2,7 +2,8 @@ import axios from "axios";
 import { ReactNode, createContext, useState, useEffect, useContext } from "react";
 
 type IUser = {
-  name: string; reg_no: string, role: string, token: string, exam_access?: string,
+  _id: string,
+  name: string; reg_no: string, email: string, role: string, token: string, exam_access?: string,
 }
 
 type IAuthContext = {
@@ -18,7 +19,7 @@ type IAuthContext = {
 const AuthContext = createContext<IAuthContext>({
   authenticated: false,
   setAuthenticated: () => { },
-  user: { name: "", reg_no: "", role: "", token: "" },
+  user: { _id: "", name: "", email: "", reg_no: "", role: "", token: "" },
   setUser: () => { },
   login: () => { },
   logout: () => { },
@@ -40,7 +41,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setAuthenticated(false)
-    setUser({ name: "", reg_no: "", role: "", token: "", exam_access: "" });
+    setUser({ _id: "", name: "", email: "", reg_no: "", role: "", token: "", exam_access: "" });
   }
 
   useEffect(() => {

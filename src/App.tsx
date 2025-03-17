@@ -17,6 +17,7 @@ import ExamCompleted from './pages/student-exam/ExamCompleted';
 import Users from './pages/dashboard/users/Users';
 import Results from './pages/dashboard/results/Results';
 import ResultId from './pages/dashboard/results/ResultId';
+import Profile from './pages/profile/Profile';
 
 
 const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
@@ -50,6 +51,7 @@ function App() {
               <Route path="exam" element={<Exam />} />
               <Route path="results" element={<Results />} />
               <Route path="results/:exam_id" element={<ResultId />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
 
             {/* Exam Interface */}
