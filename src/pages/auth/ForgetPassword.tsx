@@ -18,7 +18,6 @@ const ForgetPassword = () => {
     resolver: zodResolver(forgetPasswordSchema),
     defaultValues: {
       reg_no: "",
-      email: "",
     }
   })
 
@@ -30,7 +29,7 @@ const ForgetPassword = () => {
     setIsLoading(true)
 
     try {
-      axios.post('http://localhost:3000/auth/forgot-password', data)
+      axios.post('https://ex-board.vercel.app/auth/forgot-password', data)
         .then((response: AxiosResponse<{
           success: boolean,
           message: string,
@@ -40,11 +39,10 @@ const ForgetPassword = () => {
           //create a toast message feedback 
           if (response.data?.success) {
             toast({
-              title: "Login successfully",
+              title: "Check your mail",
               description: response?.data?.message
             })
 
-            // form.formState.isSubmitSuccessful
           } else {
             toast({
               variant: "destructive",
@@ -56,7 +54,7 @@ const ForgetPassword = () => {
           console.error(err)
           toast({
             variant: "destructive",
-            title: "Something went wrong. Try again!",
+            title: "Request error!",
             description: err.response?.data?.message
           })
         })
@@ -72,8 +70,7 @@ const ForgetPassword = () => {
   return (
     <div className=" flex  min-h-screen items-center justify-center">
       {
-        // form.formState.isSubmitSuccessful ?
-        false ?
+        form.formState.isSubmitSuccessful ?
           < Card >
             <CardHeader>
               <div className="flex items-center justify-center space-x-1">
@@ -88,7 +85,7 @@ const ForgetPassword = () => {
 
             </CardHeader>
             <CardContent>
-              <p>A verification link has been sent to {form.getValues('email')}. Access the link to proceed to reset your password</p>
+              <p>A verification link has been sent to the associated mail. Access the link to proceed to reset your password</p>
             </CardContent>
           </Card>
           :
@@ -116,20 +113,6 @@ const ForgetPassword = () => {
                         <FormLabel>Registration No</FormLabel>
                         <FormControl>
                           <Input placeholder="e.g 25/STD001" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {/* Email Field */}
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>E-mail</FormLabel>
-                        <FormControl>
-                          <Input type='email' placeholder="e.g name@example.com" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

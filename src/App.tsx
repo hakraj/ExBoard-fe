@@ -41,7 +41,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
           <Route path='forgot-password' element={<ForgetPassword />} />
-          <Route path='reset-password/:id' element={<ResetPassword />} />
+          <Route path='reset-password/:token' element={<ResetPassword />} />
           <Route path='*' element={<NoPageFound />} />
 
           {/* PROTECTED ROUTES */}
