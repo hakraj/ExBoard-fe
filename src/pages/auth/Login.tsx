@@ -164,7 +164,7 @@ const Login = () => {
                   </FormItem>
                 )}
               />
-
+              <div className="text-right my-1"><span className=" text-indigo-600 hover:text-indigo-700 underline"><a href="/forgot-password">Forgot Password </a> </span> </div>
               {isLoading ?
                 <Button disabled className=" cursor-progress">
                   <Loader2 className="animate-spin" />

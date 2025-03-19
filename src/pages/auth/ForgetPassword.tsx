@@ -24,6 +24,8 @@ const ForgetPassword = () => {
   const { toast } = useToast()
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
+
 
   const resetHandler = (data: z.infer<typeof forgetPasswordSchema>) => {
     setIsLoading(true)
@@ -43,6 +45,7 @@ const ForgetPassword = () => {
               description: response?.data?.message
             })
 
+            setIsSuccessful(true)
           } else {
             toast({
               variant: "destructive",
@@ -70,7 +73,7 @@ const ForgetPassword = () => {
   return (
     <div className=" flex  min-h-screen items-center justify-center">
       {
-        form.formState.isSubmitSuccessful ?
+        isSuccessful ?
           < Card >
             <CardHeader>
               <div className="flex items-center justify-center space-x-1">
@@ -85,7 +88,7 @@ const ForgetPassword = () => {
 
             </CardHeader>
             <CardContent>
-              <p>A verification link has been sent to the associated mail. Access the link to proceed to reset your password</p>
+              <p>A verification link has been sent to the associated mail. <br />Access the link to proceed to reset your password</p>
             </CardContent>
           </Card>
           :
